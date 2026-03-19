@@ -1,14 +1,19 @@
 <div id="myDIV" class="header">
   <h2 style="margin:5px">My To Do List</h2>
-  <input type="text" id="myInput" placeholder="Title...">
-  <span onclick="newElement()" class="addBtn">Add</span>
+  <input type="text" id="myInput" placeholder="輸入待辦事項" [value]="title()" (input)="title.set($any($event.target).value)"
+    (keydown)="onKeydown($event)">
+  <span (click)="addTodo()" class="addBtn">Add</span>
 </div>
 
+@if (todos().length === 0) {
+<p>暫無待辦事項</p>
+} @else {
 <ul id="myUL">
-  <li>Hit the gym</li>
-  <li class="checked">Pay bills</li>
-  <li>Meet George</li>
-  <li>Buy eggs</li>
-  <li>Read a book</li>
-  <li>Organize office</li>
+  @for (todo of todos(); track todo.id) {
+  <li [class.checked]="todo.completed" (click)="toggleTodo(todo.id)">
+    {{ todo.title }}
+    <span class="close" (click)="remove(todo.id); $event.stopPropagation()">×</span>
+  </li>
+  }
 </ul>
+}
