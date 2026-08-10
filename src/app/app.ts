@@ -17,7 +17,7 @@ export class App {
   todos = signal<Todo[]>(this.readFromStorage());
   title = signal("");
   // count = signal(0);
-  count = 0;
+  count = 0;;;;;;
 
   addTodo() {
     const text = this.title().trim();
