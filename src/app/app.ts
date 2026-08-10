@@ -16,6 +16,8 @@ type Todo = {
 export class App {
   todos = signal<Todo[]>(this.readFromStorage());
   title = signal("");
+  // count = signal(0);
+  count = 0;
 
   addTodo() {
     const text = this.title().trim();
@@ -61,5 +63,15 @@ export class App {
       event.preventDefault();
       this.addTodo();
     }
+  }
+
+  increase() {
+    // this.count.update(number => number + 1);
+    this.count = this.count + 1
+  }
+
+  decrease() {
+    // this.count.update(number => number - 1);
+    this.count = this.count - 1
   }
 }
